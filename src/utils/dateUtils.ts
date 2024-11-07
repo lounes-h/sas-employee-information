@@ -6,6 +6,9 @@ import utc from 'dayjs/plugin/utc';
 dayjs.extend(customParseFormat);
 dayjs.extend(utc);
 
+
+// TODO: fix the two digit year issue
+
 export const parseDate = (dateString: string): Date => {
     // Define the possible date formats
     const formats = [

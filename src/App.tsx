@@ -6,14 +6,16 @@ import { Container, Typography, Box } from '@mui/material';
 import { MonthSelector } from './components/MonthSelector/index';
 import { EmployeeTable } from './components/EmployeeTable/index';
 import { EmployeeProvider } from './contexts/EmployeeContext';
+import { Header } from './components/Header/index';
 
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline /> 
-      <EmployeeProvider>
-        <Container maxWidth="lg">
+      <EmployeeProvider>  
+        <Header />
+        <Container maxWidth={false}>
           <Box sx={{ my: 4 }}>
             <Typography variant="h3" component="h1" gutterBottom>
               Employee Information
