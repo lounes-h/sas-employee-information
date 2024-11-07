@@ -3,28 +3,28 @@ import { Employee } from '../types/Employee';
 import { parseCSVData } from '../utils/csvParser';
 
 export const useEmployees = () => {
-  const [employees, setEmployees] = useState<Employee[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+    const [employees, setEmployees] = useState<Employee[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
-    const loadEmployees = async () => {
-      try {
+    useEffect(() => {
+        const loadEmployees = async () => {
+            try {
 
-          const response = await fetch('/data/programming-challenge-data.csv');
-          const csvContent = await response.text();
-          
-          const parsedEmployees = parseCSVData(csvContent);
-          setEmployees(parsedEmployees);
-          setIsLoading(false);
-      } catch (err) {
-        setError(err instanceof Error ? err : new Error('Failed to load employees data'));
-        setIsLoading(false);
-      }
-    };
+                const response = await fetch('/data/programming-challenge-data.csv');
+                const csvContent = await response.text();
 
-    loadEmployees();
-  }, []);
+                const parsedEmployees = parseCSVData(csvContent);
+                setEmployees(parsedEmployees);
+                setIsLoading(false);
+            } catch (err) {
+                setError(err instanceof Error ? err : new Error('Failed to load employees data'));
+                setIsLoading(false);
+            }
+        };
 
-  return { employees, isLoading, error };
+        loadEmployees();
+    }, []);
+
+    return { employees, isLoading, error };
 };

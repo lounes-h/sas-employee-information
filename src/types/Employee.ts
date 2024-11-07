@@ -3,7 +3,7 @@ export interface Employee {
     lastName: string;
     location: string;
     birthday: Date;
-  }
+}
 
 export interface EmployeeRaw {
     'First name': string;

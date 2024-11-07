@@ -11,39 +11,39 @@ dayjs.extend(utc);
 
 export const parseDate = (dateString: string): Date => {
     const formats = [
-      'M/D/YYYY',    // e.g., 9/23/1963
-      'DD-MMM-YY',   // e.g., 25-Apr-60
-      'D-MMM-YY'     // e.g., 2-Apr-78
+        'M/D/YYYY',    // e.g., 9/23/1963
+        'DD-MMM-YY',   // e.g., 25-Apr-60
+        'D-MMM-YY'     // e.g., 2-Apr-78
     ];
-  
+
     let parsedDate = null;
-  
+
     for (const format of formats) {
-      parsedDate = dayjs(dateString, format, true); // strict parsing
-      if (parsedDate.isValid()) {
-        return parsedDate.toDate();
-      }
+        parsedDate = dayjs(dateString, format, true); // strict parsing
+        if (parsedDate.isValid()) {
+            return parsedDate.toDate();
+        }
     }
-  
+
     throw new Error(`Unable to parse date: ${dateString}`);
-  };
+};
 
 export const formatDate = (date: Date): string => {
-  return dayjs(date).format('MM/DD/YYYY');
+    return dayjs(date).format('MM/DD/YYYY');
 };
 
 export const calculateAge = (birthday: Date): number => {
-  return dayjs().diff(dayjs(birthday), 'year');
+    return dayjs().diff(dayjs(birthday), 'year');
 };
 
 export const getMonthName = (date: Date): string => {
-  return dayjs(date).format('MMMM');
+    return dayjs(date).format('MMMM');
 };
 
 export const getCurrentMonth = (): string => {
-  return dayjs().format('MMMM');
+    return dayjs().format('MMMM');
 };
 
 export const isSameMonth = (date1: Date, date2: Date): boolean => {
-  return dayjs(date1).format('MMMM') === dayjs(date2).format('MMMM');
+    return dayjs(date1).format('MMMM') === dayjs(date2).format('MMMM');
 };

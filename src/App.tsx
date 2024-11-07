@@ -10,22 +10,22 @@ import { Header } from './components/Header/index';
 
 
 function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline /> 
-      <EmployeeProvider>  
-        <Header />
-        <Container maxWidth={false}>
-          <Box sx={{ my: 4 }}>
-            <Box sx={{ mb: 3 }}>
-              <MonthSelector />
-            </Box>
-            <EmployeeTable />
-          </Box>
-        </Container>
-      </EmployeeProvider>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <EmployeeProvider>
+                <Header />
+                <Container maxWidth={false}>
+                    <Box sx={{ my: 4 }}>
+                        <Box sx={{ mb: 3 }}>
+                            <MonthSelector />
+                        </Box>
+                        <EmployeeTable />
+                    </Box>
+                </Container>
+            </EmployeeProvider>
+        </ThemeProvider>
+    );
 }
 
 export default App;
