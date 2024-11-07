@@ -1,17 +1,15 @@
 import React from 'react';
 import {
   TableBody,
-  TableCell,
-  TableRow,
   CircularProgress,
   Typography,
   Alert,
   AlertTitle
 } from '@mui/material';
 import { useEmployeeContext } from '../../contexts/EmployeeContext';
-import { StyledTableContainer, StyledTable, StyledTableHead, EmptyStateContainer } from './styled';
-import { calculateAge } from '../../utils/dateUtils';
-
+import { StyledTableContainer, StyledTable, EmptyStateContainer } from './styles';
+import EmployeeRow from './EmployeeRow';
+import TableHeader from './TableHeader';
 
 export const EmployeeTable: React.FC = () => {
   const { filteredEmployees, isLoading, error } = useEmployeeContext();
@@ -49,28 +47,11 @@ export const EmployeeTable: React.FC = () => {
   return (
     <StyledTableContainer>
       <StyledTable aria-label="employee table">
-        <StyledTableHead>
-          <TableRow>
-            <TableCell>First Name</TableCell>
-            <TableCell>Last Name</TableCell>
-            <TableCell>Location</TableCell>
-            <TableCell>Birthday</TableCell>
-            <TableCell>Age (years)</TableCell>
-          </TableRow>
-        </StyledTableHead>
+        <TableHeader />
         <TableBody>
-
-
           {filteredEmployees.map((employee, index) => (
-            <TableRow key={index}>
-              <TableCell>{employee.firstName}</TableCell>
-              <TableCell>{employee.lastName}</TableCell>
-              <TableCell>{employee.location}</TableCell>
-              <TableCell>
-                {new Date(employee.birthday).toLocaleDateString()}
-              </TableCell>
-              <TableCell>{calculateAge(employee.birthday)}</TableCell>
-            </TableRow>
+            <EmployeeRow key={`${employee.firstName}-${employee.lastName}-${employee.birthday.getTime()}`}
+            employee={employee} />
           ))}
         </TableBody>
       </StyledTable>

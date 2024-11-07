@@ -3,6 +3,7 @@ import { MenuItem, Typography, InputLabel } from '@mui/material';
 import { useEmployeeContext } from '../../contexts/EmployeeContext';
 import { StyledFormControl, StyledSelect, StyledWrapper, StyledFilterWrapper, StyledFilterButton } from './styles';
 import { Month } from '../../types/Month';
+
 const months = [
   'All months',
   'January', 'February', 'March', 'April', 'May', 'June',

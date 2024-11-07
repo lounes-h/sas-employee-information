@@ -40,6 +40,10 @@ export const StyledTable = styled(Table)(({ theme }) => ({
 
 export const StyledTableHead = styled(TableHead)(({ theme }) => ({
   backgroundColor: theme.palette.tertiary.main,
+  position: 'sticky', 
+  top: 0,
+  zIndex: 1,
+  width: '100%',
   '& .MuiTableCell-head': {
     color: theme.palette.primary.contrastText,
     fontWeight: 'bold',
@@ -51,9 +55,7 @@ export const StyledTableHead = styled(TableHead)(({ theme }) => ({
 }));
 
 export const StyledHeaderRow = styled(TableRow)(({ theme }) => ({
-  '&:hover': {
-    backgroundColor: `${theme.palette.primary.dark} !important`,
-  },
+  
 }));
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({
