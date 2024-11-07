@@ -35,7 +35,7 @@ export const EmployeeTable: React.FC = () => {
             <TableCell>Last Name</TableCell>
             <TableCell>Location</TableCell>
             <TableCell>Birthday</TableCell>
-            <TableCell>Age</TableCell>
+            <TableCell>Age (years)</TableCell>
           </TableRow>
         </StyledTableHead>
         <TableBody>

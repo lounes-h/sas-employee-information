@@ -1,9 +1,8 @@
 import { styled } from '@mui/material/styles';
-import { FormControl, Select } from '@mui/material';
+import { FormControl, Select, Box, Button } from '@mui/material';
 
 export const StyledFormControl = styled(FormControl)(({ theme }) => ({
-  maxWidth: 200,
-  marginBottom: theme.spacing(3),
+  minWidth: 200,
   '& .MuiOutlinedInput-root': {
     borderRadius: theme.shape.borderRadius,
     backgroundColor: theme.palette.background.paper,
@@ -29,4 +28,24 @@ export const StyledSelect = styled(Select)(({ theme }) => ({
   '& .MuiMenuItem-root': {
     padding: theme.spacing(1.5),
   },
+}));
+
+export const StyledWrapper = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+}));
+
+export const StyledFilterWrapper = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+}));
+
+export const StyledFilterButton = styled(Button)(({ theme }) => ({
+  minWidth: 150,
+  minHeight: 46,
+  marginRight: theme.spacing(2),
 }));

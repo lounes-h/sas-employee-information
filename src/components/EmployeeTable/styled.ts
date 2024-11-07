@@ -39,7 +39,7 @@ export const StyledTable = styled(Table)(({ theme }) => ({
 }));
 
 export const StyledTableHead = styled(TableHead)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
+  backgroundColor: theme.palette.tertiary.main,
   '& .MuiTableCell-head': {
     color: theme.palette.primary.contrastText,
     fontWeight: 'bold',
