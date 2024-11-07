@@ -30,17 +30,21 @@ export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const { employees, isLoading, error } = useEmployees();
 
-  const sortByFullBirthday = (employees: Employee[]): Employee[] => {
+  const sortByMonthAndDay = (employees: Employee[]): Employee[] => {
     return [...employees].sort((a, b) => {
-      const dateA = dayjs(a.birthday).valueOf();
-      const dateB = dayjs(b.birthday).valueOf();
-      return dateA - dateB;
+      const dateA = dayjs(a.birthday);
+      const dateB = dayjs(b.birthday);
+      
+      const monthDiff = dateA.month() - dateB.month();
+      if (monthDiff !== 0) return monthDiff;
+      
+      return dateA.date() - dateB.date();
     });
   };
 
   const filteredEmployees = React.useMemo(() => {
     const filtered = filterEmployeesByMonth(employees, appliedFilterMonth);
-    return sortByFullBirthday(filtered);
+    return sortByMonthAndDay(filtered);
   }, [employees, appliedFilterMonth]);
 
   const applyFilter = React.useCallback(() => {
