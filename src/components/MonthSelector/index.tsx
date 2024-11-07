@@ -10,7 +10,14 @@ const months = [
 ];
 
 export const MonthSelector: React.FC = () => {
-  const { selectedMonth, setSelectedMonth } = useEmployeeContext();
+
+  const { 
+    selectedMonth, 
+    appliedFilterMonth,
+    setSelectedMonth, 
+    applyFilter,
+    isLoading 
+  } = useEmployeeContext();
 
   return (
     <StyledWrapper>
@@ -18,7 +25,8 @@ export const MonthSelector: React.FC = () => {
         Employee Information
       </Typography>
       <StyledFilterWrapper>
-        <StyledFilterButton variant="contained" color="primary">Apply Filter</StyledFilterButton>
+        <StyledFilterButton variant="contained" color="primary" onClick={applyFilter}
+        disabled={isLoading || selectedMonth === appliedFilterMonth}>Apply Filter</StyledFilterButton>
         <StyledFormControl fullWidth>
           <InputLabel id="month-select-label">Select a month</InputLabel>
           <StyledSelect
