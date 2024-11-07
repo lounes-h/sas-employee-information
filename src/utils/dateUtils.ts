@@ -10,7 +10,6 @@ dayjs.extend(utc);
 // TODO: fix the two digit year issue
 
 export const parseDate = (dateString: string): Date => {
-    // Define the possible date formats
     const formats = [
       'M/D/YYYY',    // e.g., 9/23/1963
       'DD-MMM-YY',   // e.g., 25-Apr-60
