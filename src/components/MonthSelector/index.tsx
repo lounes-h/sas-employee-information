@@ -1,7 +1,8 @@
 import React from 'react';
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { useEmployeeContext } from '../../contexts/EmployeeContext';
-
+import { StyledFormControl, StyledSelect } from './styles';
+import { Month } from '../../types/Month';
 const months = [
   'All months',
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -12,14 +13,14 @@ export const MonthSelector: React.FC = () => {
   const { selectedMonth, setSelectedMonth } = useEmployeeContext();
 
   return (
-    <FormControl fullWidth>
+    <StyledFormControl fullWidth>
       <InputLabel id="month-select-label">Select a month</InputLabel>
-      <Select
+      <StyledSelect
         labelId="month-select-label"
         id="month-select"
         value={selectedMonth}
         label="Select a month"
-        onChange={(e) => setSelectedMonth(e.target.value)}
+        onChange={(e) => setSelectedMonth(e.target.value as Month)}
         data-testid="month-selector"
       >
         {months.map((month) => (
@@ -27,7 +28,7 @@ export const MonthSelector: React.FC = () => {
             {month}
           </MenuItem>
         ))}
-      </Select>
-    </FormControl>
+      </StyledSelect>
+    </StyledFormControl>
   );
 };

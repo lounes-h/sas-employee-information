@@ -13,8 +13,10 @@ export const useEmployees = () => {
         // Load the CSV file
         const response = await fetch('/data/programming-challenge-data.csv');
         const csvContent = await response.text();
+        console.log('csvContent ', csvContent);
         
         const parsedEmployees = parseCSVData(csvContent);
+        console.log('parsedEmployees ', parsedEmployees);
         setEmployees(parsedEmployees);
         setIsLoading(false);
       } catch (err) {

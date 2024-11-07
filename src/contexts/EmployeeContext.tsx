@@ -1,39 +1,49 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+
+import React, { createContext, useContext } from 'react';
 import { Employee } from '../types/Employee';
+import { Month } from '../types/Month';
+import { useEmployees } from '../hooks/useEmployees';
+import { filterEmployeesByMonth } from '../utils/filterUtils';
+import { useLocalStorage } from '../hooks/useLocalStorage';
+import dayjs from 'dayjs';
 
 interface EmployeeContextType {
   employees: Employee[];
-  selectedMonth: string;
-  setSelectedMonth: (month: string) => void;
   filteredEmployees: Employee[];
+  selectedMonth: Month;
+  setSelectedMonth: (month: Month) => void;
+  isLoading: boolean;
+  error: Error | null;
 }
 
 const EmployeeContext = createContext<EmployeeContextType | undefined>(undefined);
 
 export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [employees, setEmployees] = useState<Employee[]>([]);
-  const [selectedMonth, setSelectedMonth] = useState<string>(
-    new Date().toLocaleString('default', { month: 'long' })
+
+  const currentMonth = dayjs().format('MMMM') as Month;
+  
+  const [selectedMonth, setSelectedMonth] = useLocalStorage<Month>(
+    'selectedMonth',
+    currentMonth
   );
 
+  const { employees, isLoading, error } = useEmployees();
+
   const filteredEmployees = React.useMemo(() => {
-    if (selectedMonth === 'All months') return employees;
-    return employees.filter(employee => {
-      const birthMonth = new Date(employee.birthday)
-        .toLocaleString('default', { month: 'long' });
-      return birthMonth === selectedMonth;
-    });
+    return filterEmployeesByMonth(employees, selectedMonth);
   }, [employees, selectedMonth]);
 
+  const value = React.useMemo(() => ({
+    employees,
+    filteredEmployees,
+    selectedMonth,
+    setSelectedMonth,
+    isLoading,
+    error,
+  }), [employees, filteredEmployees, selectedMonth, isLoading, error]);
+
   return (
-    <EmployeeContext.Provider 
-      value={{ 
-        employees, 
-        selectedMonth, 
-        setSelectedMonth, 
-        filteredEmployees 
-      }}
-    >
+    <EmployeeContext.Provider value={value}>
       {children}
     </EmployeeContext.Provider>
   );
@@ -41,7 +51,7 @@ export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
 export const useEmployeeContext = () => {
   const context = useContext(EmployeeContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useEmployeeContext must be used within an EmployeeProvider');
   }
   return context;

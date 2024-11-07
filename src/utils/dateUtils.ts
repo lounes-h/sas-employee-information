@@ -7,15 +7,24 @@ dayjs.extend(customParseFormat);
 dayjs.extend(utc);
 
 export const parseDate = (dateString: string): Date => {
-
-  let parsedDate = dayjs(dateString, 'M/D/YYYY', true);
-
-  if (parsedDate.isValid()) {
-    return parsedDate.toDate();
-  }
-
-  throw new Error(`Unable to parse date: ${dateString}`);
-};
+    // Define the possible date formats
+    const formats = [
+      'M/D/YYYY',    // e.g., 9/23/1963
+      'DD-MMM-YY',   // e.g., 25-Apr-60
+      'D-MMM-YY'     // e.g., 2-Apr-78
+    ];
+  
+    let parsedDate = null;
+  
+    for (const format of formats) {
+      parsedDate = dayjs(dateString, format, true); // strict parsing
+      if (parsedDate.isValid()) {
+        return parsedDate.toDate();
+      }
+    }
+  
+    throw new Error(`Unable to parse date: ${dateString}`);
+  };
 
 export const formatDate = (date: Date): string => {
   return dayjs(date).format('MM/DD/YYYY');

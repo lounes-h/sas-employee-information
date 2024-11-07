@@ -9,6 +9,7 @@ import {
   Paper,
 } from '@mui/material';
 import { useEmployeeContext } from '../../contexts/EmployeeContext';
+import { StyledTableContainer, StyledTable, StyledTableHead } from './styled';
 
 const calculateAge = (birthday: Date): number => {
   const today = new Date();
@@ -26,9 +27,9 @@ export const EmployeeTable: React.FC = () => {
   const { filteredEmployees } = useEmployeeContext();
 
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="employee table">
-        <TableHead>
+    <StyledTableContainer>
+      <StyledTable aria-label="employee table">
+        <StyledTableHead>
           <TableRow>
             <TableCell>First Name</TableCell>
             <TableCell>Last Name</TableCell>
@@ -36,7 +37,7 @@ export const EmployeeTable: React.FC = () => {
             <TableCell>Birthday</TableCell>
             <TableCell>Age</TableCell>
           </TableRow>
-        </TableHead>
+        </StyledTableHead>
         <TableBody>
           {filteredEmployees.map((employee, index) => (
             <TableRow key={index}>
@@ -50,7 +51,7 @@ export const EmployeeTable: React.FC = () => {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
-    </TableContainer>
+      </StyledTable>
+    </StyledTableContainer>
   );
 };
