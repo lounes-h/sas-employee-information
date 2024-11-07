@@ -1,30 +1,50 @@
 import React from 'react';
 import {
-  Table,
   TableBody,
   TableCell,
-  TableContainer,
-  TableHead,
   TableRow,
-  Paper,
+  CircularProgress,
+  Typography,
+  Alert,
+  AlertTitle
 } from '@mui/material';
 import { useEmployeeContext } from '../../contexts/EmployeeContext';
-import { StyledTableContainer, StyledTable, StyledTableHead } from './styled';
+import { StyledTableContainer, StyledTable, StyledTableHead, EmptyStateContainer } from './styled';
+import { calculateAge } from '../../utils/dateUtils';
 
-const calculateAge = (birthday: Date): number => {
-  const today = new Date();
-  const birthDate = new Date(birthday);
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const monthDiff = today.getMonth() - birthDate.getMonth();
-  
-  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-    age--;
-  }
-  return age;
-};
 
 export const EmployeeTable: React.FC = () => {
-  const { filteredEmployees } = useEmployeeContext();
+  const { filteredEmployees, isLoading, error } = useEmployeeContext();
+
+  if (error) {
+    return (
+      <Alert severity="error">
+        <AlertTitle>Error</AlertTitle>
+        {error.message}
+      </Alert>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <EmptyStateContainer>
+        <CircularProgress />
+        <Typography variant="h6">
+          Loading employee data...
+        </Typography>
+      </EmptyStateContainer>
+    );
+  }
+
+  if (filteredEmployees.length === 0) {
+    return (
+      <EmptyStateContainer>
+        <Typography variant="h6">
+          No employees data found 
+        </Typography>
+      </EmptyStateContainer>
+    );
+  }
 
   return (
     <StyledTableContainer>
@@ -39,6 +59,8 @@ export const EmployeeTable: React.FC = () => {
           </TableRow>
         </StyledTableHead>
         <TableBody>
+
+
           {filteredEmployees.map((employee, index) => (
             <TableRow key={index}>
               <TableCell>{employee.firstName}</TableCell>

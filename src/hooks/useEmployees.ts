@@ -10,13 +10,13 @@ export const useEmployees = () => {
   useEffect(() => {
     const loadEmployees = async () => {
       try {
-        // Load the CSV file
-        const response = await fetch('/data/programming-challenge-data.csv');
-        const csvContent = await response.text();
-        
-        const parsedEmployees = parseCSVData(csvContent);
-        setEmployees(parsedEmployees);
-        setIsLoading(false);
+
+          const response = await fetch('/data/programming-challenge-data.csv');
+          const csvContent = await response.text();
+          
+          const parsedEmployees = parseCSVData(csvContent);
+          setEmployees(parsedEmployees);
+          setIsLoading(false);
       } catch (err) {
         setError(err instanceof Error ? err : new Error('Failed to load employees data'));
         setIsLoading(false);

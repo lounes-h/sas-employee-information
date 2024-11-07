@@ -1,10 +1,9 @@
 // src/context/EmployeeContext.tsx
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { Employee } from '../types/Employee';
 import { Month } from '../types/Month';
 import { useEmployees } from '../hooks/useEmployees';
 import { filterEmployeesByMonth } from '../utils/filterUtils';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 import dayjs from 'dayjs';
 
 interface EmployeeContextType {
@@ -24,16 +23,10 @@ export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const currentMonth = dayjs().format('MMMM') as Month;
   
   // State for the month selected in dropdown
-  const [selectedMonth, setSelectedMonth] = useLocalStorage<Month>(
-    'selectedMonth',
-    currentMonth
-  );
+  const [selectedMonth, setSelectedMonth] = useState<Month>(currentMonth);
 
   // State for the actually applied filter
-  const [appliedFilterMonth, setAppliedFilterMonth] = useLocalStorage<Month>(
-    'appliedFilterMonth',
-    currentMonth
-  );
+  const [appliedFilterMonth, setAppliedFilterMonth] = useState<Month>(currentMonth);
 
   const { employees, isLoading, error } = useEmployees();
 
