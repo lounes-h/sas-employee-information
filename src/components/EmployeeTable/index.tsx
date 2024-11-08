@@ -11,7 +11,7 @@ import { StyledTableContainer, StyledTable, EmptyStateContainer } from './styles
 import EmployeeRow from './EmployeeRow';
 import TableHeader from './TableHeader';
 
-export const EmployeeTable: React.FC = () => {
+const EmployeeTable: React.FC = () => {
     const { filteredEmployees, isLoading, error } = useEmployeeContext();
 
     if (error) {
@@ -58,3 +58,5 @@ export const EmployeeTable: React.FC = () => {
         </StyledTableContainer>
     );
 };
+
+export default EmployeeTable;

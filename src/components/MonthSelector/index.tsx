@@ -10,7 +10,7 @@ const months = [
     'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-export const MonthSelector: React.FC = () => {
+const MonthSelector: React.FC = () => {
 
     const {
         selectedMonth,
@@ -50,3 +50,5 @@ export const MonthSelector: React.FC = () => {
         </StyledWrapper>
     );
 };
+
+export default MonthSelector;

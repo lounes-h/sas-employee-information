@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { AppBar, Toolbar } from '@mui/material';
+import { AppBar } from '@mui/material';
 
 export const StyledHeader = styled(AppBar)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,

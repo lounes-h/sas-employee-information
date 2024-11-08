@@ -17,31 +17,33 @@ interface EmployeeContextType {
     error: Error | null;
 }
 
-const EmployeeContext = createContext<EmployeeContextType | undefined>(undefined);
+// Create and export the context
+export const EmployeeContext = createContext<EmployeeContextType | undefined>(undefined);
+
+const sortByMonthAndDay = (employees: Employee[]): Employee[] => {
+    return [...employees].sort((a, b) => {
+        const dateA = dayjs(a.birthday);
+        const dateB = dayjs(b.birthday);
+
+        // Compare months first
+        const monthDiff = dateA.month() - dateB.month();
+        if (monthDiff !== 0) return monthDiff;
+
+        // If months are the same, compare days
+        return dateA.date() - dateB.date();
+    });
+};
 
 export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const currentMonth = dayjs().format('MMMM') as Month;
 
-    // State for the month selected in dropdown
     const [selectedMonth, setSelectedMonth] = useState<Month>(currentMonth);
 
-    // State for the actually applied filter
     const [appliedFilterMonth, setAppliedFilterMonth] = useState<Month>(currentMonth);
 
     const { employees, isLoading, error } = useEmployees();
 
-    const sortByMonthAndDay = (employees: Employee[]): Employee[] => {
-        return [...employees].sort((a, b) => {
-            const dateA = dayjs(a.birthday);
-            const dateB = dayjs(b.birthday);
-
-            const monthDiff = dateA.month() - dateB.month();
-            if (monthDiff !== 0) return monthDiff;
-
-            return dateA.date() - dateB.date();
-        });
-    };
-
+    // First filter, then sort by month and day
     const filteredEmployees = React.useMemo(() => {
         const filtered = filterEmployeesByMonth(employees, appliedFilterMonth);
         return sortByMonthAndDay(filtered);

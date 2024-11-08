@@ -1,12 +1,11 @@
-import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './styles/theme';
 import { Container, Box } from '@mui/material';
-import { MonthSelector } from './components/MonthSelector/index';
-import { EmployeeTable } from './components/EmployeeTable/index';
+import MonthSelector from './components/MonthSelector/index';
+import EmployeeTable from './components/EmployeeTable/index';
 import { EmployeeProvider } from './contexts/EmployeeContext';
-import { Header } from './components/Header/index';
+import Header from './components/Header/index';
 
 
 function App() {

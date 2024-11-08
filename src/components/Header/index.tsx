@@ -4,7 +4,7 @@ import { Container, Toolbar } from '@mui/material';
 import { StyledLogo, StyledHeader } from './styles';
 import LogoWhite from '../../assets/images/logo-white.png';
 
-export const Header: React.FC = () => {
+const Header: React.FC = () => {
     return (
         <StyledHeader position="relative">
             <Container maxWidth={false}>
@@ -18,3 +18,5 @@ export const Header: React.FC = () => {
         </StyledHeader>
     );
 };
+
+export default Header;
