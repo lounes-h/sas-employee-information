@@ -1,61 +1,10 @@
-import React from 'react';
-import { render, screen, within } from '@testing-library/react';
-import { ThemeProvider } from '@mui/material/styles';
+import { screen, within } from '@testing-library/react';
 import EmployeeTable from '../../components/EmployeeTable';
-import { EmployeeContext } from '../../contexts/EmployeeContext';
-import theme from '../../styles/theme';
-import { Employee } from '../../types/Employee';
-import { Month } from '../../types/Month';
+import {
+    renderWithContext
+} from '../../__mocks__/employeeContext';
+import { mockEmployees } from '../../__mocks__/mockData';
 
-// Mock data
-const mockEmployees: Employee[] = [
-    {
-        firstName: 'John',
-        lastName: 'Doe',
-        location: 'New York, NY',
-        birthday: new Date('02-11-1984'),
-    },
-    {
-        firstName: 'Jane',
-        lastName: 'Smith',
-        location: 'Los Angeles, CA',
-        birthday: new Date('01-10-1980'),
-    }
-];
-
-// Mock context value factory
-const createMockContextValue = (
-    overrides: Partial<{
-        filteredEmployees: Employee[];
-        isLoading: boolean;
-        error: Error | null;
-        appliedFilterMonth: Month;
-    }> = {}
-) => ({
-    employees: mockEmployees,
-    filteredEmployees: mockEmployees,
-    selectedMonth: 'All months' as Month,
-    appliedFilterMonth: 'All months' as Month,
-    setSelectedMonth: jest.fn(),
-    applyFilter: jest.fn(),
-    isLoading: false,
-    error: null,
-    ...overrides
-});
-
-// Wrapper component with context
-const renderWithContext = (
-    ui: React.ReactElement,
-    contextValue = createMockContextValue()
-) => {
-    return render(
-        <ThemeProvider theme={theme}>
-            <EmployeeContext.Provider value={contextValue}>
-                {ui}
-            </EmployeeContext.Provider>
-        </ThemeProvider>
-    );
-};
 
 describe('EmployeeTable', () => {
     describe('Table Structure', () => {
@@ -122,7 +71,7 @@ describe('EmployeeTable', () => {
         it('shows loading spinner when data is loading', () => {
             renderWithContext(
                 <EmployeeTable />,
-                createMockContextValue({ isLoading: true })
+                { isLoading: true }
             );
 
             expect(screen.getByText('Loading employee data...')).toBeInTheDocument();
@@ -135,9 +84,7 @@ describe('EmployeeTable', () => {
             const errorMessage = 'Failed to load';
             renderWithContext(
                 <EmployeeTable />,
-                createMockContextValue({
-                    error: new Error(errorMessage)
-                })
+                { error: new Error(errorMessage) }
             );
 
             expect(screen.getByText(errorMessage)).toBeInTheDocument();
@@ -149,10 +96,10 @@ describe('EmployeeTable', () => {
         it('shows empty state message when no employees match filter', () => {
             renderWithContext(
                 <EmployeeTable />,
-                createMockContextValue({
+                {
                     filteredEmployees: [],
                     appliedFilterMonth: 'January'
-                })
+                }
             );
 
             expect(screen.getByText(/No employees/)).toBeInTheDocument();
