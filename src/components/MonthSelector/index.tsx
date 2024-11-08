@@ -3,12 +3,9 @@ import { MenuItem, Typography, InputLabel } from '@mui/material';
 import { useEmployeeContext } from '../../contexts/EmployeeContext';
 import { StyledFormControl, StyledSelect, StyledWrapper, StyledFilterWrapper, StyledFilterButton } from './styles';
 import { Month } from '../../types/Month';
+import { MONTHS } from '../../constants';
 
-const months = [
-    'All months',
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-];
+
 
 const MonthSelector: React.FC = () => {
 
@@ -38,7 +35,7 @@ const MonthSelector: React.FC = () => {
                         onChange={(e) => setSelectedMonth(e.target.value as Month)}
                         data-testid="month-selector"
                     >
-                        {months.map((month) => (
+                        {MONTHS.map((month) => (
                             <MenuItem key={month} value={month}>
                                 {month}
                             </MenuItem>
