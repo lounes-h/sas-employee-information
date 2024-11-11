@@ -9,7 +9,6 @@ dayjs.extend(utc);
 
 
 // TODO: fix the two digit year issue
-
 export const parseDate = (dateString: string): Date => {
     const formats = [
         'M/D/YYYY',    // e.g., 9/23/1963
@@ -43,8 +42,4 @@ export const getMonthName = (date: Date): string => {
 
 export const getCurrentMonth = (): string => {
     return dayjs().format('MMMM');
-};
-
-export const isSameMonth = (date1: Date, date2: Date): boolean => {
-    return dayjs(date1).format('MMMM') === dayjs(date2).format('MMMM');
 };
