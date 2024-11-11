@@ -1,7 +1,6 @@
 // src/styles/theme.ts
 import { createTheme } from '@mui/material/styles';
 
-// Define custom color palette
 declare module '@mui/material/styles' {
     interface Palette {
         tertiary: Palette['primary'];

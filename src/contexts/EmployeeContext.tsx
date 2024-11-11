@@ -17,7 +17,6 @@ interface EmployeeContextType {
     error: Error | null;
 }
 
-// Create and export the context
 export const EmployeeContext = createContext<EmployeeContextType | undefined>(undefined);
 
 const sortByMonthAndDay = (employees: Employee[]): Employee[] => {
@@ -43,7 +42,6 @@ export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     const { employees, isLoading, error } = useEmployees();
 
-    // First filter, then sort by month and day
     const filteredEmployees = React.useMemo(() => {
         const filtered = filterEmployeesByMonth(employees, appliedFilterMonth);
         return sortByMonthAndDay(filtered);

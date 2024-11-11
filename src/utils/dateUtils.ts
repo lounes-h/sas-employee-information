@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import utc from 'dayjs/plugin/utc';
+import { BIRTHDAY_DATE_FORMAT } from '../constants'
 
 // Initialize
 dayjs.extend(customParseFormat);
@@ -29,7 +30,7 @@ export const parseDate = (dateString: string): Date => {
 };
 
 export const formatDate = (date: Date): string => {
-    return dayjs(date).format('MM/DD/YYYY');
+    return dayjs(date).format(BIRTHDAY_DATE_FORMAT);
 };
 
 export const calculateAge = (birthday: Date): number => {
