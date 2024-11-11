@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { MenuItem, Typography, InputLabel } from '@mui/material';
 import { useEmployeeContext } from '../../contexts/EmployeeContext';
 import { StyledFormControl, StyledSelect, StyledWrapper, StyledFilterWrapper, StyledFilterButton } from './styles';
@@ -7,7 +7,7 @@ import { MONTHS } from '../../constants';
 
 
 
-const MonthSelector: React.FC = () => {
+const MonthSelector: FC = () => {
 
     const {
         selectedMonth,

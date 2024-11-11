@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import {
     TableBody,
     CircularProgress,
@@ -11,7 +11,7 @@ import { StyledTableContainer, StyledTable, EmptyStateContainer } from './styles
 import EmployeeRow from './EmployeeRow';
 import TableHeader from './TableHeader';
 
-const EmployeeTable: React.FC = () => {
+const EmployeeTable: FC = () => {
     const { filteredEmployees, isLoading, error } = useEmployeeContext();
 
     if (error) {

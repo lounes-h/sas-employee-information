@@ -1,5 +1,5 @@
 // src/context/EmployeeContext.tsx
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, FC, ReactNode, useMemo, useCallback } from 'react';
 import { Employee } from '../types/Employee';
 import { Month } from '../types/Month';
 import { useEmployees } from '../hooks/useEmployees';
@@ -33,7 +33,7 @@ const sortByMonthAndDay = (employees: Employee[]): Employee[] => {
     });
 };
 
-export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const EmployeeProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const currentMonth = dayjs().format('MMMM') as Month;
 
     const [selectedMonth, setSelectedMonth] = useState<Month>(currentMonth);
@@ -42,16 +42,16 @@ export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     const { employees, isLoading, error } = useEmployees();
 
-    const filteredEmployees = React.useMemo(() => {
+    const filteredEmployees = useMemo(() => {
         const filtered = filterEmployeesByMonth(employees, appliedFilterMonth);
         return sortByMonthAndDay(filtered);
     }, [employees, appliedFilterMonth]);
 
-    const applyFilter = React.useCallback(() => {
+    const applyFilter = useCallback(() => {
         setAppliedFilterMonth(selectedMonth);
     }, [selectedMonth, setAppliedFilterMonth]);
 
-    const value = React.useMemo(() => ({
+    const value = useMemo(() => ({
         employees,
         filteredEmployees,
         selectedMonth,

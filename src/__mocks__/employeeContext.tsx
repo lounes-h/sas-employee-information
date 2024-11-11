@@ -1,5 +1,5 @@
 // src/__mocks__/employeeContext.tsx
-import React from 'react';
+import { ReactNode, FC, ReactElement } from 'react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material/styles';
 import { EmployeeContext } from '../contexts/EmployeeContext';
@@ -38,10 +38,10 @@ export const createMockContextValue = (
 // Mock context provider component
 interface MockProviderProps {
     contextValue?: Partial<MockContextValue>;
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
-export const MockEmployeeProvider: React.FC<MockProviderProps> = ({
+export const MockEmployeeProvider: FC<MockProviderProps> = ({
     contextValue = {},
     children
 }) => {
@@ -58,7 +58,7 @@ export const MockEmployeeProvider: React.FC<MockProviderProps> = ({
 
 // Render helper
 export const renderWithContext = (
-    ui: React.ReactElement,
+    ui: ReactElement,
     contextValue: Partial<MockContextValue> = {}
 ) => {
     return render(
