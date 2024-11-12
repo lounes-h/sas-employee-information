@@ -12,19 +12,19 @@ import {
 export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
     maxHeight: 'calc(100vh - 250px)',
     marginTop: theme.spacing(2),
-    boxShadow: theme.shadows[2],
-    borderRadius: theme.shape.borderRadius,
+    boxShadow: 'none',
+    borderRadius: 'none',
     '&::-webkit-scrollbar': {
         width: '0.4em',
         height: '0.4em',
     },
     '&::-webkit-scrollbar-track': {
         background: theme.palette.background.paper,
-        borderRadius: theme.shape.borderRadius,
+        borderRadius: 'none',
     },
     '&::-webkit-scrollbar-thumb': {
         backgroundColor: theme.palette.primary.light,
-        borderRadius: theme.shape.borderRadius,
+        borderRadius: 'none',
         '&:hover': {
             backgroundColor: theme.palette.primary.main,
         },
@@ -39,11 +39,11 @@ export const StyledTable = styled(Table)(({ theme }) => ({
 }));
 
 export const StyledTableHead = styled(TableHead)(({ theme }) => ({
-    backgroundColor: theme.palette.tertiary.main,
     position: 'sticky',
     top: 0,
     zIndex: 1,
     width: '100%',
+    backgroundColor: theme.palette.primary.contrastText,
     '& .MuiTableCell-head': {
         color: theme.palette.primary.contrastText,
         fontWeight: 'bold',
@@ -59,12 +59,11 @@ export const StyledHeaderRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
+
+    '&:hover': {
         backgroundColor: theme.palette.action.hover,
     },
-    '&:hover': {
-        backgroundColor: theme.palette.action.selected,
-    },
+
     // Transition for smooth hover effect
     transition: theme.transitions.create(['background-color'], {
         duration: theme.transitions.duration.shortest,
@@ -80,14 +79,18 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
             backgroundColor: theme.palette.primary.dark,
         },
     },
+
+    '&.MuiTableCell-head': {
+        color: theme.palette.primary.dark,
+    }
 }));
 
 export const StyledPaper = styled(Paper)(({ theme }) => ({
     width: '100%',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-    borderRadius: theme.shape.borderRadius,
-    boxShadow: theme.shadows[2],
+    borderRadius: 'none',
+    boxShadow: 'none',
 }));
 
 // Styled components for sorting indicators

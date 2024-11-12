@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { FormControl, Select, Box, Button, Container, Typography } from '@mui/material';
+import { FormControl, Select, Box, Button, Container } from '@mui/material';
 
 export const StyledFormControl = styled(FormControl)(({ theme }) => ({
     minWidth: 200,

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { MenuItem, Typography, InputLabel, Box } from '@mui/material';
+import { MenuItem, Typography, InputLabel } from '@mui/material';
 import { useEmployeeContext } from '../../contexts/EmployeeContext';
 import { StyledFormControl, StyledSelect, StyledWrapper, StyledFilterWrapper, StyledFilterButton } from './styles';
 import { Month } from '../../types/Month';
