@@ -7,6 +7,7 @@ export const parseCSVData = (csvContent: string): Employee[] => {
         header: true,
         skipEmptyLines: true,
     });
+
     return (data as EmployeeRaw[]).map((row: EmployeeRaw) => ({
         firstName: row['First name'],
         lastName: row['Last name'],

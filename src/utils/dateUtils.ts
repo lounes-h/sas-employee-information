@@ -19,7 +19,7 @@ export const parseDate = (dateString: string): Date => {
     let parsedDate = null;
 
     for (const format of formats) {
-        parsedDate = dayjs(dateString, format, true); // strict parsing
+        parsedDate = dayjs(dateString, format, true);
         if (parsedDate.isValid()) {
             return parsedDate.toDate();
         }

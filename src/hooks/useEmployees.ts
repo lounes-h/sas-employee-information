@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Employee } from '../types/Employee';
-import { parseCSVData } from '../utils/csvParser';
+import { parseCSVData } from '../utils/fileUtils';
 
 export const useEmployees = () => {
     const [employees, setEmployees] = useState<Employee[]>([]);
@@ -11,7 +11,7 @@ export const useEmployees = () => {
         const loadEmployees = async () => {
             try {
 
-                const response = await fetch('/data/programming-challenge-data.csv');
+                const response = await fetch('/data/employee-data.csv');
                 const csvContent = await response.text();
 
                 const parsedEmployees = parseCSVData(csvContent);

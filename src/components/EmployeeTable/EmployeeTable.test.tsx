@@ -4,6 +4,7 @@ import {
     renderWithContext
 } from '../../__mocks__/employeeContext';
 import { mockEmployees } from '../../__mocks__/mockData';
+import { calculateAge, formatDate } from '../../utils/dateUtils';
 
 
 describe('EmployeeTable', () => {
@@ -38,17 +39,22 @@ describe('EmployeeTable', () => {
             renderWithContext(<EmployeeTable />);
 
             mockEmployees.forEach(employee => {
+                const employeeBithday = formatDate(employee.birthday);
+                const employeeAge = calculateAge(employee.birthday);
+
                 expect(screen.getByText(employee.firstName)).toBeInTheDocument();
                 expect(screen.getByText(employee.lastName)).toBeInTheDocument();
                 expect(screen.getByText(employee.location)).toBeInTheDocument();
+                expect(screen.getByText(employeeBithday)).toBeInTheDocument();
+                expect(screen.getByText(employeeAge)).toBeInTheDocument();
             });
         });
 
         it('formats dates correctly', () => {
             renderWithContext(<EmployeeTable />);
 
-            expect(screen.getByText('02/11/1984')).toBeInTheDocument();
-            expect(screen.getByText('01/10/1980')).toBeInTheDocument();
+            expect(screen.getByText('Feb 11, 1984')).toBeInTheDocument();
+            expect(screen.getByText('Jan 10, 1980')).toBeInTheDocument();
         });
 
         it('calculates ages correctly', () => {

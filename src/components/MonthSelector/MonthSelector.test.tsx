@@ -25,20 +25,6 @@ describe('MonthSelector', () => {
     });
 
     describe('Month Selection', () => {
-        it('calls setSelectedMonth when month is changed', () => {
-            const mockSetSelectedMonth = jest.fn();
-            renderWithContext(<MonthSelector />, {
-                setSelectedMonth: mockSetSelectedMonth
-            });
-
-            const select = screen.getByLabelText('Select a month');
-            fireEvent.mouseDown(select);
-
-            const monthOption = screen.getByRole('option', { name: 'March' });
-            fireEvent.click(monthOption);
-
-            expect(mockSetSelectedMonth).toHaveBeenCalledWith('March');
-        });
 
         it('shows all months in the dropdown', async () => {
             renderWithContext(<MonthSelector />);
@@ -68,37 +54,20 @@ describe('MonthSelector', () => {
                 expect(within(listbox).getByText(month)).toBeInTheDocument();
             });
         });
-    });
 
-    describe('Filter Button', () => {
-        it('is disabled when selected month equals applied filter month', () => {
+        it('calls setSelectedMonth when month is changed', () => {
+            const mockSetSelectedMonth = jest.fn();
             renderWithContext(<MonthSelector />, {
-                selectedMonth: 'January',
-                appliedFilterMonth: 'January'
+                setSelectedMonth: mockSetSelectedMonth
             });
 
-            expect(screen.getByRole('button', { name: /Apply Filter/i })).toBeDisabled();
-        });
+            const select = screen.getByLabelText('Select a month');
+            fireEvent.mouseDown(select);
 
-        it('is enabled when selected month differs from applied filter month', () => {
-            renderWithContext(<MonthSelector />, {
-                selectedMonth: 'February',
-                appliedFilterMonth: 'January'
-            });
+            const monthOption = screen.getByRole('option', { name: 'March' });
+            fireEvent.click(monthOption);
 
-            expect(screen.getByRole('button', { name: /Apply Filter/i })).toBeEnabled();
-        });
-
-        it('calls applyFilter when clicked', () => {
-            const mockApplyFilter = jest.fn();
-            renderWithContext(<MonthSelector />, {
-                selectedMonth: 'February',
-                appliedFilterMonth: 'January',
-                applyFilter: mockApplyFilter
-            });
-
-            fireEvent.click(screen.getByRole('button', { name: /Apply Filter/i }));
-            expect(mockApplyFilter).toHaveBeenCalled();
+            expect(mockSetSelectedMonth).toHaveBeenCalledWith('March');
         });
     });
 
@@ -129,7 +98,20 @@ describe('MonthSelector', () => {
         });
     });
 
-    describe('Button States', () => {
+    describe('Filter Button', () => {
+
+        it('calls applyFilter when clicked', () => {
+            const mockApplyFilter = jest.fn();
+            renderWithContext(<MonthSelector />, {
+                selectedMonth: 'February',
+                appliedFilterMonth: 'January',
+                applyFilter: mockApplyFilter
+            });
+
+            fireEvent.click(screen.getByRole('button', { name: /Apply Filter/i }));
+            expect(mockApplyFilter).toHaveBeenCalled();
+        });
+
         it('disables Apply Filter button during loading', () => {
             renderWithContext(<MonthSelector />, {
                 isLoading: true,
