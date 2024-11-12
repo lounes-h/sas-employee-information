@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { FormControl, Select, Box, Button } from '@mui/material';
+import { FormControl, Select, Box, Button, Container, Typography } from '@mui/material';
 
 export const StyledFormControl = styled(FormControl)(({ theme }) => ({
     minWidth: 200,
@@ -30,11 +30,15 @@ export const StyledSelect = styled(Select)(({ theme }) => ({
     },
 }));
 
-export const StyledWrapper = styled(Box)(({ theme }) => ({
+export const StyledWrapper = styled(Container)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+
+    [theme.breakpoints.down('sm')]: {
+        flexDirection: 'column',
+    },
 }));
 
 export const StyledFilterWrapper = styled(Box)(({ theme }) => ({
@@ -42,6 +46,11 @@ export const StyledFilterWrapper = styled(Box)(({ theme }) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+
+    [theme.breakpoints.down('sm')]: {
+        marginTop: 30,
+        marginBottom: 10
+    },
 }));
 
 export const StyledFilterButton = styled(Button)(({ theme }) => ({
