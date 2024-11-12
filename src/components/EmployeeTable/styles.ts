@@ -13,18 +13,18 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
     maxHeight: 'calc(100vh - 250px)',
     marginTop: theme.spacing(2),
     boxShadow: 'none',
-    borderRadius: 'none',
+    borderRadius: 0,
     '&::-webkit-scrollbar': {
         width: '0.4em',
         height: '0.4em',
     },
     '&::-webkit-scrollbar-track': {
         background: theme.palette.background.paper,
-        borderRadius: 'none',
+        borderRadius: 0,
     },
     '&::-webkit-scrollbar-thumb': {
         backgroundColor: theme.palette.primary.light,
-        borderRadius: 'none',
+        borderRadius: 0,
         '&:hover': {
             backgroundColor: theme.palette.primary.main,
         },
@@ -89,7 +89,7 @@ export const StyledPaper = styled(Paper)(({ theme }) => ({
     width: '100%',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-    borderRadius: 'none',
+    borderRadius: 0,
     boxShadow: 'none',
 }));
 

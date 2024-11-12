@@ -4,7 +4,7 @@ import { AppBar } from '@mui/material';
 export const StyledHeader = styled(AppBar)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     boxShadow: 'none',
-    borderBottom: `1px solid ${theme.palette.primary.dark}`,
+    borderBottom: 'none',
     height: 54,
     minHeight: 54,
     '& .MuiToolbar-root': {

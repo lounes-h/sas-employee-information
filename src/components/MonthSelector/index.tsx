@@ -24,7 +24,9 @@ const MonthSelector: FC = () => {
             </Typography>
             <StyledFilterWrapper>
                 <StyledFilterButton variant="contained" color="primary" onClick={applyFilter}
-                    disabled={isLoading || selectedMonth === appliedFilterMonth}>Apply Filter</StyledFilterButton>
+                    disabled={isLoading || selectedMonth === appliedFilterMonth}>
+                    Apply Filter
+                </StyledFilterButton>
                 <StyledFormControl fullWidth>
                     <InputLabel id="month-select-label">Select a month</InputLabel>
                     <StyledSelect
