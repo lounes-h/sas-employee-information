@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# SAS's Employee Information App
+The Employee Information App is a React-based tool for HR teams to view and filter employee birthdays by month. It displays employee details like name, location, birthday, and age, making it easy to recognize birthdays across the organization.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
