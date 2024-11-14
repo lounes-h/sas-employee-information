@@ -5,6 +5,7 @@ import { parseDate } from './dateUtils';
 export const parseCSVData = (csvContent: string): Employee[] => {
     const { data } = Papa.parse(csvContent, {
         header: true,
+        transform: (value) => value.trim(),
         skipEmptyLines: true,
     });
 

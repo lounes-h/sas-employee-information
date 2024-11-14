@@ -8,7 +8,6 @@ import { Employee } from '../types/Employee';
 import { Month } from '../types/Month';
 import { mockEmployees } from './mockData';
 
-// Mock context value type
 export type MockContextValue = {
     employees: Employee[];
     filteredEmployees: Employee[];
@@ -20,7 +19,6 @@ export type MockContextValue = {
     error: Error | null;
 };
 
-// Mock context value factory
 export const createMockContextValue = (
     overrides: Partial<MockContextValue> = {}
 ): MockContextValue => ({
@@ -35,7 +33,6 @@ export const createMockContextValue = (
     ...overrides
 });
 
-// Mock context provider component
 interface MockProviderProps {
     contextValue?: Partial<MockContextValue>;
     children: ReactNode;
@@ -56,7 +53,6 @@ export const MockEmployeeProvider: FC<MockProviderProps> = ({
     );
 };
 
-// Render helper
 export const renderWithContext = (
     ui: ReactElement,
     contextValue: Partial<MockContextValue> = {}

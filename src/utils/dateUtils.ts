@@ -7,8 +7,6 @@ import { BIRTHDAY_DATE_FORMAT } from '../constants'
 dayjs.extend(customParseFormat);
 dayjs.extend(utc);
 
-
-// TODO: fix the two digit year issue
 export const parseDate = (dateString: string): Date => {
     const formats = [
         'M/D/YYYY',    // e.g., 9/23/1963
@@ -16,11 +14,15 @@ export const parseDate = (dateString: string): Date => {
         'D-MMM-YY'     // e.g., 2-Apr-78
     ];
 
-    let parsedDate = null;
-
     for (const format of formats) {
-        parsedDate = dayjs(dateString, format, true);
+        const parsedDate = dayjs(dateString, format, true);
         if (parsedDate.isValid()) {
+            // For two-digit years (YY format), convert using 18 as threshold
+            if (format.includes('YY')) {
+                const lastTwoDigits = parsedDate.year() % 100;
+                const baseYear = lastTwoDigits >= 18 ? 1900 : 2000;
+                return parsedDate.year(baseYear + lastTwoDigits).toDate();
+            }
             return parsedDate.toDate();
         }
     }

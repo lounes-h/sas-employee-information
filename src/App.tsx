@@ -14,7 +14,7 @@ function App() {
             <CssBaseline />
             <EmployeeProvider>
                 <Header />
-                <Container maxWidth={false}>
+                <Container maxWidth="xl">
                     <Box sx={{ my: 4 }}>
                         <Box sx={{ mb: 3 }}>
                             <MonthSelector />
